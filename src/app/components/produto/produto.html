@@ -1,17 +1,4 @@
-<!--cria uma div que contém as informações do produto-->
-<!--<div>
-    @if(mostrarProduto){
-        <h3>Produto: {{ produto }}</h3>
-    }
-    @if(mostrarPreco){
-        <h3>Preço: R$ {{ preco }}</h3>
-    }
-</div> -->
-<div> <!-- adiciona nome div -->
-    @for(item of produtos;track item){
-        <div>
-            <h3>{{item.nome | uppercase }}</h3>
-            <p>{{item.preco}}</p>
-        </div>
-    }
+<div class="produto">
+    <h3>{{nome | uppercase }}</h3>
+    <p>{{preco | precoFormatado}}</p>
 </div>
