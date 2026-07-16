@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Produto } from '../produto/produto';
+import {signal} from '@angular/core';
 
 @Component({
   selector: 'app-lista-produtos',
@@ -8,11 +9,11 @@ import { Produto } from '../produto/produto';
   styleUrl: './lista-produtos.css',
 })
 export class ListaProdutos {
-  produtos = [
+  produtos = signal([
     {nome: 'Fone Gamer', preco:345.99},
     {nome: 'Teclado Gamer Arceus', preco: 456.99},
     {nome: 'RTX 5090', preco: 25999.99}
-  ];
+  ]);
   exibirProduto(nome: string){
     console.log('Produto Selecionado: ', nome);
   }
