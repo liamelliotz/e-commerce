@@ -17,4 +17,10 @@ export class ListaProdutos {
   exibirProduto(nome: string){
     console.log('Produto Selecionado: ', nome);
   }
+  adicionarProduto(){
+    this.produtos.update(listaAtual => [
+      ...listaAtual,
+      {nome:'Playstation 5', preco:3000},
+    ]);
+  }
 }
