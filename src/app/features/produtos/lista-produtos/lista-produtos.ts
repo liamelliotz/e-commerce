@@ -45,6 +45,7 @@ substituirProdutos(){
     { nome:'Headset', preco:30 },
   ]);
  }
+//!metodo para monitorar as alterações em tempo real usando effect()
 constructor(){
   effect(() =>{
     console.log('Lista de Produtos Alterados: ', this.produtos());
