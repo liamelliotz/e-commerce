@@ -59,5 +59,6 @@ constructor(){
     }
   });
 }
+//!metodo para criar um estado de seleção com signal string / null
 produtoSelecionado = signal <string | null>(null);
 }
