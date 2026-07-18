@@ -4,10 +4,11 @@ import {signal} from '@angular/core';
 import { computed } from '@angular/core';
 import { PrecoFormatadoPipe } from '../../../shared/pipes/preco-formatado-pipe'
 import { effect } from '@angular/core';
+import { UpperCasePipe } from '@angular/common';
 
 @Component({
   selector: 'app-lista-produtos',
-  imports: [Produto, PrecoFormatadoPipe],
+  imports: [Produto,PrecoFormatadoPipe,UpperCasePipe],
   templateUrl: './lista-produtos.html',
   styleUrl: './lista-produtos.css',
 })
@@ -21,6 +22,7 @@ export class ListaProdutos {
 //!função para exibir produtos selecionados pelo usuário no console 
   exibirProduto(nome: string){
     console.log('Produto Selecionado: ', nome);
+    this.produtoSelecionado.set(nome);
   }
 //!funcão que adiciona produtos usando metodo update()
   adicionarProduto(){
@@ -61,4 +63,5 @@ constructor(){
 }
 //!metodo para criar um estado de seleção com signal string / null
 produtoSelecionado = signal <string | null>(null);
+
 }
