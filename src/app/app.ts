@@ -4,9 +4,9 @@ import { UpperCasePipe } from '@angular/common';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, RouterLink, UpperCasePipe],
+  imports: [RouterOutlet, RouterLink, UpperCasePipe], //Stand Alone = Independente
   templateUrl: './app.html',
-  styleUrl: './app.css'
+  styleUrl: './app.css',
 })
 export class App {
   protected readonly title = signal('e-commerce');
