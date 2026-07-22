@@ -1,5 +1,5 @@
 import { Routes } from '@angular/router';
-
+//!metodo de rotas laseloading e loadcomponent
 export const routes: Routes = [
   {
     path: '', //!router para raiz localhost:4200/
