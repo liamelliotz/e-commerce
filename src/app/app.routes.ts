@@ -1,5 +1,8 @@
 import { Routes } from '@angular/router';
-//!metodo de rotas laseloading e loadcomponent
+import { authGuard } from './core/auth.guard';
+
+//!metodo de rotas lazy loading e loadcomponent
+
 export const routes: Routes = [
   {
     path: '', //!router para raiz localhost:4200/
@@ -12,6 +15,7 @@ export const routes: Routes = [
   },
   {
     path: 'carrinho',
+    canActivate: [authGuard],
     loadComponent: () => import('./features/carrinho/carrinho/carrinho').then((m) => m.Carrinho),
   },
   {
