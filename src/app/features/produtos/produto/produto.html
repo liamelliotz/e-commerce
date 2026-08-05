@@ -3,7 +3,11 @@
     <h3>{{ nome | uppercase}}</h3>
     <p>{{ preco | precoFormatado }}</p>
 
-    <!-- <button (click)="selecionarProduto()">
+    <button (click)="selecionarProduto()">
         Selecionar {{ nome }}
-    </button> -->
+    </button>
+    
+    <button (click)="adicionarAoCarrinho()">
+        Adicionar ao Carrinho
+    </button>
 </div>

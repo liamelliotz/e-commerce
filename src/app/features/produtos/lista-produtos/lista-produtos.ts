@@ -4,13 +4,12 @@ import { signal } from '@angular/core';
 import { computed } from '@angular/core';
 import { PrecoFormatadoPipe } from '../../../shared/pipes/preco-formatado-pipe';
 import { effect } from '@angular/core';
-import { UpperCasePipe } from '@angular/common';
 import { produtosService } from '../produtos.service';
 import { inject } from '@angular/core';
 
 @Component({
   selector: 'app-lista-produtos',
-  imports: [Produto, PrecoFormatadoPipe, UpperCasePipe],
+  imports: [Produto, PrecoFormatadoPipe],
   templateUrl: './lista-produtos.html',
   styleUrl: './lista-produtos.css',
 })
@@ -25,6 +24,8 @@ export class ListaProdutos {
   produtoSelecionado = signal <string | null>(null);
 
   carrinho = signal <{nome: string; preco: number}[]>([]);
+
+  erro = signal < string | null > (null);
 
 //?================ COMPUTED ======================
 
@@ -46,7 +47,8 @@ export class ListaProdutos {
 
   carregarProdutos(){
 
-    this.carregando.set(true);
+    this.erro.set(null); //! limpar o erro antes de fazer a requisição
+    this.carregando.set(true); //! ativar o sinal de carregando
     this.produtosService.buscarProdutos().subscribe({
       next: (dados) => {
         const produtos = this.produtosService.transformarProdutos(dados);
@@ -55,6 +57,7 @@ export class ListaProdutos {
       },
       error: (erro) => {
         console.error('Erro ao carregar produtos: ', erro);
+        this.erro.set('Erro ao carregar produtos. Por favor, tente novamente!');
         this.carregando.set(false);
       }
     });
