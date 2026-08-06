@@ -1,152 +1,47 @@
 <h2>Produtos</h2>
-
-<!-- ========================================= -->
-<!-- ESTADO 1: CARREGAMENTO -->
-<!-- ========================================= -->
-
-<!--
-  O @if é uma estrutura de controle do Angular.
-
-  Aqui verifica se a variável carregando() é verdadeira.
-  Enquanto os produtos estão sendo buscados, mostra uma mensagem
-  informando o usuário que deve aguardar.
--->
 @if (carregando()) {
-  <!-- Mensagem exibida durante o carregamento -->
   <p>
     <strong>Carregando produtos, aguarde...</strong>
   </p>
 }
-
-<!-- ========================================= -->
-<!-- ESTADO 2: ERRO -->
-<!-- ========================================= -->
-
-<!--
-  Verifica se existe algum erro.
-
-  A função erro() provavelmente retorna uma mensagem de erro.
-  Caso exista um erro, essa parte será exibida.
--->
 @if (erro()) {
-  <!-- Exibe a mensagem de erro em vermelho -->
   <p>
     <strong style="color: red">
       {{ erro() }}
     </strong>
   </p>
 
-  <!--
-    Botão que chama a função carregarProduto().
-
-    Serve para tentar buscar os produtos novamente
-    depois de uma falha.
-  -->
   <button (click)="carregarProduto()">Tente novamente</button>
 }
 
-<!-- ========================================= -->
-<!-- LISTAGEM DOS PRODUTOS -->
-<!-- ========================================= -->
-
-<!--
-  Mostra a lista somente quando:
-
-  1. Não está carregando
-  2. Não existe erro
-
-  Ou seja, só mostra os produtos quando a busca terminou
-  com sucesso.
--->
 @if (!carregando() && !erro()) {
-  <!--
-    Mostra a quantidade total de produtos.
-
-    totalProdutos() provavelmente é um Signal ou função
-    que retorna a quantidade de produtos carregados.
-  -->
-  <p>
-    <strong>Quantidade de produtos:</strong>
-    {{ totalProdutos() }}
-  </p>
-
-  <!-- Linha divisória visual -->
-  <hr>
-  <!--
-    Laço de repetição do Angular.
-
-    Percorre todos os produtos existentes no signal produtos().
-
-    item representa cada produto individual.
-
-    track item.nome ajuda o Angular a identificar cada item
-    e melhorar o desempenho da atualização da tela.
-  -->
-  @for (item of produtos(); track item.nome) {
-    <!--
-      Renderiza o componente filho app-produto.
-
-      Envia informações do produto através de Inputs:
-
-      [nome]  recebe o nome do produto.
-      [preco] recebe o preço do produto.
-
-      Escuta o evento produtoSelecionado emitido pelo componente filho
-      e envia o produto selecionado para o método exibirProduto().
-    -->
-    <app-produto
-      [nome]="item.nome"
-      [preco]="item.preco"
-      (produtoSelecionado)="exibirProduto($event)"
-      (produtoAdicionado)="adicionarAoCarrinho($event)"
-    >
-    </app-produto>
-
-
-  }
+  <p><strong>Quantidade de produtos:</strong> {{ totalProdutos() }}</p>
+  <section class="grid-produtos">
+    @for (item of produtos(); track item.nome) {
+      <app-produto
+        [nome]="item.nome"
+        [preco]="item.preco"
+        (produtoSelecionado)="exibirProduto($event)"
+        (produtoAdicionado)="adicionarAoCarrinho($event)"
+      >
+      </app-produto>
+    }
+  </section>
 }
 
-<!-- ========================================= -->
-<!-- CARRINHO DE COMPRAS -->
-<!-- ========================================= -->
-
-<hr>
+<hr />
 <h2>Carrinho</h2>
 
-<!--
-  Percorre todos os produtos adicionados ao carrinho.
-
-  carrinho() provavelmente é um Signal contendo
-  os produtos selecionados pelo usuário.
--->
 @for (item of carrinho(); track item.nome) {
-  <!--
-    Mostra:
-
-    Nome do produto
-    Preço formatado usando um Pipe personalizado.
-
-    precoFormatado transforma o valor antes de exibir.
-  -->
   <p>{{ item.nome }} - {{ item.preco | precoFormatado }}</p>
 }
 
 <hr />
 
-<!--
-  Mostra a quantidade de produtos dentro do carrinho.
--->
 <p>
   <strong>Quantidade de itens:</strong>
   {{ quantidadeCarrinho() }}
 </p>
-
-<!--
-  Mostra o valor total da compra.
-
-  O pipe precoFormatado deixa o valor em um formato amigável,
-  por exemplo: R$ 100,00.
--->
 <p>
   <strong>Valor total do carrinho:</strong>
   {{ totalCarrinho() | precoFormatado }}
