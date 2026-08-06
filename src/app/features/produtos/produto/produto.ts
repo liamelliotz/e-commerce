@@ -5,18 +5,24 @@
 // Output -> permite enviar dados para outro componente (pai).
 // EventEmitter -> usado para emitir eventos do componente filho para o pai.
 import { Component, Input, Output, EventEmitter } from '@angular/core';
-
 // Importa Pipes nativos do Angular.
-
 // UpperCasePipe -> transforma textos em letras maiúsculas.
-
 // CurrencyPipe -> transforma números em formato de moeda.
 // (Neste código ele foi importado, mas não está sendo utilizado.)
 import { UpperCasePipe, CurrencyPipe } from '@angular/common';
-
 // Importa um Pipe personalizado criado na aplicação.
 // Ele é usado para formatar preços.
 import { PrecoFormatadoPipe } from '../../../shared/pipes/preco-formatado-pipe';
+
+import { MatButtonModule } from '@angular/material/button';
+// Importa o módulo de botões do Angular Material,
+// permitindo utilizar componentes como <button mat-button>,
+// <button mat-raised-button>, <button mat-icon-button>, entre outros.
+
+import { MatCardModule } from '@angular/material/card';
+// Importa o módulo de cartões do Angular Material,
+// permitindo utilizar componentes como <mat-card> para
+// organizar e exibir informações em formato de cartão.
 
 @Component({
   // Nome da tag que representa esse componente no HTML.
@@ -32,7 +38,7 @@ import { PrecoFormatadoPipe } from '../../../shared/pipes/preco-formatado-pipe';
 
   // PrecoFormatadoPipe:
   // permite usar | precoFormatado no template.
-  imports: [UpperCasePipe, PrecoFormatadoPipe],
+  imports: [UpperCasePipe, PrecoFormatadoPipe, MatButtonModule, MatCardModule],
 
   // Arquivo HTML ligado ao componente.
   templateUrl: './produto.html',
