@@ -1,4 +1,9 @@
 /* You can add global styles to this file, and also import other style files */
 body {
     background-color: #f9f9f9;
+    margin: 0;
+    font-family: roboto, sans-serif;
+}
+h2{
+    margin-top: 16px;
 }
