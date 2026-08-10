@@ -1,12 +1,11 @@
-<h1>{{ nomeLoja | uppercase }}</h1>
-<nav>
-    <a routerLink="/">Home</a> | 
-    <a routerLink="/produtos">Produtos</a> |
-    <a routerLink="/carrinho">Carrinho</a> 
-</nav>
-<hr>
-<button (click)="login()">Login</button>
-<button (click)="logout()">Logout</button>
+<app-header></app-header>
+<main class="container-principal ">
+
+<section class="bloco-controle">
+<button mat-raised-button color="primary" (click)="login()">Login</button>
+<button mat-stroked-button color="accent" (click)="logout()">Logout</button>
 <p>Status {{usuarioLogado() ? 'Logado' : 'Deslogado'}}</p>
-<hr>
+</section>
+
 <router-outlet></router-outlet>
+</main>

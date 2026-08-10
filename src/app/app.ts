@@ -3,9 +3,11 @@ import { RouterOutlet, RouterLink } from '@angular/router';
 import { UpperCasePipe } from '@angular/common';
 import { LowerCasePipe } from '@angular/common';
 import { usuarioLogado, login, logout } from './core/auth';
+import { MatButtonModule } from '@angular/material/button';
+import { Header } from './shared/layout/header/header';
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, RouterLink, UpperCasePipe],
+  imports: [RouterOutlet, RouterLink, UpperCasePipe, MatButtonModule, Header],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
