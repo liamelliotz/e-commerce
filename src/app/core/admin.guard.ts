@@ -6,11 +6,11 @@ export const adminGuard: CanActivateFn = () => {
   const router = inject(Router);
   const authService = inject(AuthService);
 
-  if (!authService.usuarioLogado()) {
+  if (!authService.estaLogado()) {
     return router.createUrlTree(['/login']);
   }
 
-  if (!authService.admin()) {
+  if (!authService.ehAdmin()) {
     return router.createUrlTree(['/acesso-negado']);
   }
 

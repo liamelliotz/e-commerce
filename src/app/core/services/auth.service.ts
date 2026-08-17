@@ -4,42 +4,58 @@ type PerfilUsuario = 'usuario' | 'admin';
 
 type Usuario = {
   email: string;
-  perfil: 'usuario';
+  perfil: PerfilUsuario;
 };
+
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
   private usuario = signal<Usuario | null>(null);
   private tokenJwt = signal<string | null>(null);
+
   usuarioAtual = computed(() => this.usuario());
+
   estaLogado = computed(() => this.usuario() !== null);
+
+  ehAdmin = computed(() => this.usuario()?.perfil === 'admin');
+
   token = computed(() => this.tokenJwt());
-  admin = computed(() => this.usuario()?.perfil === 'admin');
+
   login(email: string, senha: string): boolean {
     if (!email || !senha) {
       return false;
     }
-    const perfil: PerfilUsuario = email ==='admin@email.com.br' ? 'admin' : 'usuario';
+
+    // E-mail admin: admin@email.com
+    // Outros e-mails: usuário comum.
+    const perfil: PerfilUsuario = email === 'admin@email.com' ? 'admin' : 'usuario';
+
     const tokenSimulado =
       'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.' +
       'eyJzdWIiOiJhbHVub0B0ZXN0ZS5jb20iLCJwZXJmaWwiOiJ1c3VhcmlvIn0.' +
       'assinatura-simulada';
+
     this.usuario.set({
       email,
       perfil,
     });
+
     this.tokenJwt.set(tokenSimulado);
+
     return true;
   }
-  logout() {
+
+  logout(): void {
     this.usuario.set(null);
     this.tokenJwt.set(null);
   }
+
   obterToken(): string | null {
     return this.tokenJwt();
   }
-  obterPerfil():PerfilUsuario | null{
-    return this.usuario()?.perfil ?? null
+
+  obterPerfil(): PerfilUsuario | null {
+    return this.usuario()?.perfil ?? null;
   }
 }
