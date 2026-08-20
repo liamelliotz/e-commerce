@@ -2,6 +2,7 @@ import { Component, signal, computed, effect, inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { produtosService } from '../../../core/services/produtos.service';
 import { CarrinhoFacade } from '../../../core/facades/carrinho.facade';
+import { ItemCarrinho } from '../../../core/models/item-carrinho';
 import { Produto } from '../produto/produto';
 
 @Component({
@@ -10,7 +11,6 @@ import { Produto } from '../produto/produto';
   templateUrl: './lista-produtos.html',
   styleUrl: './lista-produtos.css',
 })
-
 export class ListaProdutos {
   // INJECTS
   produtosService = inject(produtosService);
@@ -70,7 +70,7 @@ export class ListaProdutos {
   substituirProdutos() {
     this.produtos.set([{ nome: 'Produto novo', preco: 999 }]);
   }
-  adicionarAoCarrinho(produto: { nome: string; preco: number }) {
+  adicionarAoCarrinho(produto: ItemCarrinho) {
     this.carrinhoFacade.adicionarProduto(produto);
   }
 }
